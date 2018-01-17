@@ -6,6 +6,7 @@ This is my implementation of the classic arcade game Frogger, made for the Udaci
 ## Installation
 To run the game:
 1. [Download the zip file, unzip it and open index.html on a web browser ](https://github.com/Fatima22x/frontend-nanodegree-arcade-game/archive/Frogger.zip)
+2. [Play it here](https://fatima22x.github.io/Effective-Javascript-Frogger/)
 
 ## Goals of the game
 Get the chicken to the other side of the road to get the joke answer!
