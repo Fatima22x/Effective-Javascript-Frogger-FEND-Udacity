@@ -77,8 +77,8 @@ var Engine = (function(global) {
 	 * on the entities themselves within your app.js file).
 	 */
 	function update(dt) {
-		updateEntities(dt);
-		checkCollisions();
+		player.update(dt);
+		player.checkCollisions(allEnemies);
 	}
 
 	/* This is called by the update function and loops through all of the
@@ -88,42 +88,6 @@ var Engine = (function(global) {
 	 * the data/properties related to the object. Do your drawing in your
 	 * render methods.
 	 */
-	function updateEntities(dt) {
-		allEnemies.forEach(function(enemy) {
-			enemy.update(dt);
-		});
-
-		if (Math.round(player.y / 160) === 0) {
-      player.reset();
-      var allAnswers = [
-        'To get to the other side.',
-        'He thought it was egg-citing!',
-        'To teach the other chickens how to play squash!',
-        'To go boldly where no chicken has gone before...',
-        'Just because ¯\\_(ツ)_/¯',
-        'To show that my code for this project is working!!'
-      ];
-      var joke = randomNumber(1,7) - 1;
-      var div = doc.createElement('div');
-      div.innerHTML = '<h2>' + allAnswers[joke] + "</h2>";
-      doc.body.appendChild(div);
-
-      setTimeout(function() {
-      doc.body.removeChild(div);
-    }, 3000);
-		}
-
-
-	}
-
-	function checkCollisions() {
-		allEnemies.forEach(function(enemy) {
-			if (Math.floor((enemy.x + 100) / 100) === Math.floor(player.x / 100) &&
-				Math.floor(enemy.y / 80) === Math.floor(player.y / 80)) {
-				player.reset();
-			}
-		});
-	}
 
 	/* This function initially draws the "game level", it will then call
 	 * the renderEntities function. Remember, this function is called every
@@ -141,7 +105,7 @@ var Engine = (function(global) {
 				'images/stone-block.png', // Row 2 of 3 of stone
 				'images/stone-block.png', // Row 3 of 3 of stone
 				'images/grass-block.png', // Row 1 of 2 of grass
-				'images/grass-block.png'  // Row 2 of 2 of grass
+				'images/grass-block.png' // Row 2 of 2 of grass
 			],
 			numRows = 6,
 			numCols = 5,

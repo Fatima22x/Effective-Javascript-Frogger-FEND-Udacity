@@ -69,6 +69,43 @@ Player.prototype.render = function() {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Player.prototype.update = function(dt) {
+	allEnemies.forEach(function(enemy) {
+		enemy.update(dt);
+	});
+
+	if (Math.round(player.y / 160) === 0) {
+		player.reset();
+		var allAnswers = [
+			'To get to the other side.',
+			'He thought it was egg-citing!',
+			'To teach the other chickens how to play squash!',
+			'To go boldly where no chicken has gone before...',
+			'Just because ¯\\_(ツ)_/¯',
+			'To show that my code for this project is working!!'
+		];
+
+		var joke = randomNumber(1, 7) - 1;
+		var div = document.createElement('div');
+		div.innerHTML = '<h2>' + allAnswers[joke] + "</h2>";
+		document.body.appendChild(div);
+
+		setTimeout(function() {
+			document.body.removeChild(div);
+		}, 3000);
+	}
+};
+
+//Check Collisions with Enemy
+Player.prototype.checkCollisions = function(allEnemies) {
+	allEnemies.forEach(function(enemy) {
+		if (Math.floor((enemy.x + 100) / 100) === Math.floor(player.x / 100) &&
+			Math.floor(enemy.y / 80) === Math.floor(player.y / 80)) {
+			player.reset();
+		}
+	});
+};
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
